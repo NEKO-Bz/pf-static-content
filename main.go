@@ -1,0 +1,127 @@
+package main
+
+import (
+	"encoding/json"
+	"os"
+)
+
+type Payload struct {
+	ContentHTML string `json:"content_html"`
+}
+
+func main() {
+	const html = `<div style="
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.7);
+      ">
+  <h2 style="color: #5345ba; font-weight: bold; margin: 0 10% 0% 10%;">
+    Pretty-Frank ประตูสู่โลกมังงะแปลไทยใหม่ล่าสุด!
+  </h2>
+  <p style="color: white; margin-left: 10%; margin-right: 10%">
+    เตรียมตัวให้พร้อมสำหรับการผจญภัยในโลกของการ์ตูนออนไลน์! ที่ Pretty-Frank 
+    เราคือแหล่งรวมของคนรักอ่านการ์ตูนมังงะที่ครบเครื่องที่สุดในปี 2025 ไม่ว่าคุณจะตามหามังงะญี่ปุ่นระดับตำนาน, มังฮวาเกาหลีสุดปัง, หรือมังงะจีนแนวเทพเซียนสุดอลังการ เรามีให้คุณเลือกสรรอย่างจุใจ!
+  </p>
+  <h3 style="
+    color: #5345ba;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+  ">
+    มังงะออนไลน์ฟรี ไม่ต้องใช้เหรียญ! อัปเดตไว 24 ชั่วโมง
+  </h3>
+  <p style="
+    color: white;
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+  ">
+    ลืมการรอซื้อเล่มหรือระบบเหรียญ/พ้อยท์ที่น่ารำคาญไปได้เลย! Pretty-Frank ให้คุณเข้าถึงคลังมังงะแปลไทยอัปเดตล่าสุด อ่านฟรีทุกตอน ตั้งแต่ต้นจนจบเรื่อง รวมถึงตอนใหม่ล่าสุดที่เพิ่งลงแผงจากแพลตฟอร์มดัง เราคัดสรรเฉพาะเรื่องที่ติดอันดับยอดนิยม ทั้งรายสัปดาห์และรายเดือน เพื่อให้คุณไม่พลาดทุกกระแสฮิต!
+  </p>
+  <h3 style="
+          color: #5345ba;
+          font-weight: bold;
+          text-align: left;
+          margin-left: 10%;
+          margin-right: 10%;
+        ">
+    ครบทุกชาติ ทุกแนวที่คุณหลงใหล </h3>
+  <p style="
+          color: white;
+          text-align: left;
+          margin-left: 10%;
+          margin-right: 10%;
+        ">
+    - <a href="https://pretty-frank.com/manga/manhwa">มังฮวา</a> <a href="https://pretty-frank.com/manga/manhwa">มังงะเกาหลี</a> (Manhwa): สายดราม่า, โรแมนซ์, แฟนตาซี และแอคชั่นสุดระห่ำ ที่เน้นภาพสีสวยงามและเนื้อเรื่องเข้มข้น
+    <br />
+    - <a href="https://pretty-frank.com/manga/manhua">มังฮัว</a> <a href="https://pretty-frank.com/manga/manhua">มังงะจีน</a> (Manhua) มีทั้ง<a href="https://pretty-frank.com/manga/adventure">มังงะผจญภัย</a>, <a href="https://pretty-frank.com/manga/dungeon">มังงะดันเจี้ยน</a>, และกำลังภายใน ที่พาคุณทะลุมิติไปสู่จักรวาลอันกว้างใหญ่ อย่าง <a href="https://pretty-frank.com/evolution-from">Evolution from the Big Tree</a>
+    <br />
+    - มังงะญี่ปุ่น (Manga): ผลงานโด่งดังระดับโลกที่ครองใจนักอ่าน ด้วยเนื้อหาหลากหลาย ทั้งแอคชั่น, <a href="https://pretty-frank.com/manga/comedy">คอเมดี้</a>, <a href="https://pretty-frank.com/manga/sci-fi">ไซไฟ</a>, และเรื่องราวชีวิต
+    ทุกเรื่องบน Pretty-Frank มาพร้อมกับภาพคุณภาพสูง คมชัด ทั้งแบบขาวดำคลาสสิกและฉบับภาพสีเต็มตา ให้ประสบการณ์การอ่านที่ลื่นไหลและเต็มอรรถรสที่สุด
+    </p>
+  <h3 style="
+          color: #5345ba;
+          font-weight: bold;
+          text-align: left;
+          margin-left: 10%;
+          margin-right: 10%;
+        ">
+    มังงะติดตัวไปได้ทุกที่: โลกใหม่ในมือคุณ!
+  </h3>
+  <p style="
+          color: white;
+          text-align: left;
+          margin-left: 10%;
+          margin-right: 10%;
+        ">
+    ไม่ว่าคุณจะอยู่บนรถไฟฟ้า หรือพักผ่อนอยู่บ้าน โลกแห่งมังงะก็พร้อมเปิดต้อนรับคุณทันที! ด้วยแพลตฟอร์มที่ถูกออกแบบมาอย่างพิถีพิถันของ Pretty-Frank คุณจะได้รับประสบการณ์การอ่านที่ราบรื่นไร้รอยต่อ รองรับการใช้งานอย่างเต็มรูปแบบทั้งบน iOS และ Android
+  </p>
+  <h3 style="
+          color: #5345ba;
+          font-weight: bold;
+          text-align: left;
+          margin-left: 10%;
+          margin-right: 10%;
+        ">
+    Pretty-Frank: จุดศูนย์รวมความฟินแห่งปี 2025 </h3>
+  <p style="
+          color: white;
+          text-align: left;
+          margin-left: 10%;
+          margin-right: 10%;
+        ">
+    Pretty-Frank ไม่ได้เป็นเพียงเว็บอ่านมังงะ แต่คือ "พิกัดแห่งความฟิน" ที่คนรักการ์ตูนตัวจริงต้องมาเยือนในปี 2025 เราคือที่เดียวที่รวมเอา
+    - มังงะใหม่ล่าสุด: อัปเดตก่อนใคร ไม่พลาดทุกกระแส
+    - คลังมังงะวาย <a href="https://pretty-frank.com/manga/josei">โจเซย์</a>ครบทุกอารมณ์: เอาใจสายวายโดยเฉพาะ ด้วยเรื่องราวสุดโรแมนติกที่คัดสรรมาอย่างดี
+    - อัปเดตตำนานระดับโลกแบบทันใจ: สำหรับแฟน ๆ ที่ติดตามการผจญภัยของกลุ่มโจรสลัดหมวกฟาง เราพร้อมอัปเดตตอนใหม่ของการ<a href="https://pretty-frank.com/one-piece">อ่านวันพีช 1164 - 1166</a> (One Piece) ทันที!
+  </p>
+<p
+    style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 0"
+  >
+    <a
+      href="https://www.facebook.com/sharer/sharer.php?u={{ .URL }}"
+      rel="nofollow noopener"
+      target="_blank"
+      ><img src="/pf-logo/fb.webp" alt="facebook-pretty-frank"
+    /></a>
+    <a
+      href="https://twitter.com/intent/tweet?url={{ .URL }}"
+      rel=" nofollow noopener"
+      target="_blank"
+      ><img
+        src="/pf-logo/x.webp"
+        alt="twitter-pretty-frank"
+        style="border: 1px solid #ffffff17; border-radius: 15%"
+    /></a>
+    <a
+      href="https://social-plugins.line.me/lineit/share?url={{ .URL }}"
+      rel="nofollow noopener"
+      target="_blank"
+      ><img src="/pf-logo/line.webp" alt="line-pretty-frank"
+    /></a>
+  </p>
+</div>`
+
+	b, _ := json.MarshalIndent(Payload{ContentHTML: html}, "", "  ")
+	_ = os.WriteFile("./public/footer.json", b, 0644)
+}
